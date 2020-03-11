@@ -1,0 +1,5 @@
+
+ALTER TABLE AccessToken ALTER COLUMN description TYPE TEXT;
+ALTER TABLE AccessToken ALTER COLUMN description SET NOT NULL;
+
+--//@UNDO

@@ -28,6 +28,7 @@ version = '0.0.1'
 
 repositories {
     mavenCentral()
+    maven { url "https://dl.bintray.com/gocd-maven-repo/generic/gocd" }
 }
 
 dependencies {
@@ -39,7 +40,7 @@ dependencies {
     compile group: 'org.jooq', name: 'jooq', version: '3.13.1'
 
     compile group: 'org.liquibase', name: 'liquibase-core', version: '3.8.7'
-
+    compile group: 'net.sf', name: 'dbdeploy', version: '2.11.1'
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.19'
     compile group: 'com.h2database', name: 'h2', version: '1.4.200'
     compile group: 'org.postgresql', name: 'postgresql', version: '42.2.11'
@@ -51,7 +52,7 @@ dependencies {
 targetCompatibility = 1.8
 sourceCompatibility = 1.8
 
-mainClassName = 'com.thoughtworks.go.h2export.cli.Main'
+mainClassName = 'com.thoughtworks.go.dbsync.cli.Main'
 applicationDefaultJvmArgs = ['-Xmx4g']
 
 tasks.withType(AbstractArchiveTask) {
@@ -75,9 +76,7 @@ distributions {
         contents {
             from("LICENSE")
             from("README.md")
-        }
 
-        contents {
             from(generateLicenseReport) {
                 into "licenses"
             }
@@ -85,12 +84,16 @@ distributions {
             from(file('LICENSE')) {
                 into "licenses"
             }
+
+            from("src/main/h2deltas") {
+                into "h2deltas"
+            }
+
+            from("src/main/pgdeltas") {
+                into "pgdeltas"
+            }
         }
-
-
     }
-
-
 }
 
 distTar {

@@ -35,7 +35,7 @@ class Util {
     static BasicDataSource createDataSource(String sourceDriverClass, String sourceUrl, String sourceUser, String sourcePassword, boolean readOnly) {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName(sourceDriverClass);
-        if (sourceDriverClass.equals(Driver.class.getName()) || sourceUrl.startsWith("jdbc:postgresql")) {
+        if (sourceDriverClass.equals(Driver.class.getName()) || sourceUrl.startsWith("jdbc:postgresql:")) {
             dataSource.setConnectionProperties("preferQueryMode=extendedCacheEverything");
         }
         dataSource.setUrl(sourceUrl);

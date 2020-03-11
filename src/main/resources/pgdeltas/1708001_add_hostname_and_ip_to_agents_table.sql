@@ -1,0 +1,9 @@
+ALTER TABLE agents ADD COLUMN hostname VARCHAR(255) DEFAULT NULL;
+ALTER TABLE agents ADD COLUMN ipaddress VARCHAR(50) DEFAULT NULL;
+CREATE INDEX idx_agent_uuid ON AGENTS(UUID);
+
+--//@UNDO
+
+ALTER TABLE agents DROP COLUMN hostname;
+ALTER TABLE agents DROP COLUMN ipaddress;
+DROP INDEX idx_agent_uuid IF EXISTS;

@@ -38,6 +38,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -74,6 +75,17 @@ public class DbSync {
 
         withDataSource(sourceDataSource, (connection) -> LOG.info("Using dialect {} for source database.", using(connection).dialect()));
         withDataSource(targetDataSource, (connection) -> LOG.info("Using dialect {} for target database.", using(connection).dialect()));
+
+        withDataSource(sourceDataSource, (connection -> {
+            LOG.debug("Checking if DB contains the changelog table from dbdeploy.");
+            if (new DbDeploySchemaVerifier().usesDbDeploy(connection) && isH2OrPostgres()) {
+                LOG.debug("Found changelog table, performing DB migrations using dbdeploy.");
+                String migrationSQL = new DbDeploySchemaMigrator(sourceDataSource, connection).migrationSQL();
+                try (Statement statement = connection.createStatement()) {
+                    statement.execute(migrationSQL);
+                }
+            }
+        }));
 
         withWriter((writer) -> {
             try {
@@ -149,6 +161,10 @@ public class DbSync {
         }
 
         LOG.info("Done copying tables!");
+    }
+
+    private boolean isH2OrPostgres() {
+        return args.sourceDbUrl.startsWith("jdbc:h2:") || args.sourceDbUrl.startsWith("jdbc:postgresql");
     }
 
     private void doExport(BasicDataSource sourceDataSource, DataSource targetDataSource, Writer writer) {
