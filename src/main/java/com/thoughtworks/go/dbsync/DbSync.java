@@ -70,8 +70,8 @@ public class DbSync {
         FileUtils.deleteDirectory(dumpsDir);
         FileUtils.forceMkdir(dumpsDir);
 
-        BasicDataSource sourceDataSource = createDataSource(args.sourceDbDriverClass, args.sourceDbUrl, args.sourceDbUser, args.sourceDbPassword, true);
-        BasicDataSource targetDataSource = createDataSource(args.targetDbDriverClass, args.targetDbUrl, args.targetDbUser, args.targetDbPassword, false);
+        BasicDataSource sourceDataSource = createDataSource(args.sourceDbDriverClass, args.sourceDbUrl, args.sourceDbUser, args.sourceDbPassword);
+        BasicDataSource targetDataSource = createDataSource(args.targetDbDriverClass, args.targetDbUrl, args.targetDbUser, args.targetDbPassword);
 
         withDataSource(sourceDataSource, (connection) -> LOG.info("Using dialect {} for source database.", using(connection).dialect()));
         withDataSource(targetDataSource, (connection) -> LOG.info("Using dialect {} for target database.", using(connection).dialect()));

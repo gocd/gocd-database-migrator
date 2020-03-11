@@ -32,7 +32,7 @@ import static com.thoughtworks.go.dbsync.DbSync.LOG;
 class Util {
     private static final String SQL_STMT_TERMINATE = ";\n";
 
-    static BasicDataSource createDataSource(String sourceDriverClass, String sourceUrl, String sourceUser, String sourcePassword, boolean readOnly) {
+    static BasicDataSource createDataSource(String sourceDriverClass, String sourceUrl, String sourceUser, String sourcePassword) {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName(sourceDriverClass);
         if (sourceDriverClass.equals(Driver.class.getName()) || sourceUrl.startsWith("jdbc:postgresql:")) {
@@ -40,7 +40,6 @@ class Util {
         }
         dataSource.setUrl(sourceUrl);
         dataSource.setUsername(sourceUser);
-        dataSource.setDefaultReadOnly(readOnly);
         dataSource.setPassword(sourcePassword);
         dataSource.setMaxTotal(32);
         return dataSource;
