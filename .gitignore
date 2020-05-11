@@ -44,3 +44,5 @@ gradle-app.setting
 out/
 
 *.log
+.idea
+generated

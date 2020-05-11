@@ -46,7 +46,7 @@ class ConverterTest {
     void name() throws Exception {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = dbf.newDocumentBuilder();
-        Document sourceDocument = documentBuilder.parse(new File("/Users/ketan/tmp/liquibase/full.xml"));
+        Document sourceDocument = documentBuilder.parse(new File("src/test/resources/full.xml"));
         Element sourceDocumentElement = sourceDocument.getDocumentElement();
 
         rewriteStuffInInputXML(sourceDocumentElement);
