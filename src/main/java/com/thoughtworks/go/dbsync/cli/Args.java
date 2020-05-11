@@ -28,7 +28,7 @@ public class Args {
     public String sourceDbUrl = "jdbc:h2:cruise";
 
     @Parameter(names = "--source-db-driver-class", description = "The source DB driver class.", order = 300)
-    public String sourceDbDriverClass = org.h2.Driver.class.getName();
+    public String sourceDbDriverClass;
 
     @Parameter(names = "--source-db-user", description = "The username of the source database.", order = 400)
     public String sourceDbUser = "sa";
