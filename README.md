@@ -1,20 +1,20 @@
 # Tool for Migrating GoCD data between H2/PostgreSQL/MySQL 
 
 GoCD has done several changes to its database implementation in order to build a more flexible model that allowed integrating GoCD with multiple databases.
-This application helps to migrate the data from older GoCD database to the GoCD v20.5.0 compatible database.
+This application helps to migrate the data from older GoCD database to the GoCD `v20.5.0` compatible database.
 
-Know more about GoCD support for multiple databases at [GoCD open sources Postgres Database addon]() blog post.
+Know more about GoCD support for multiple databases [here]().
 
 ## Features:
 
-* Migrates data from older GoCD database to the GoCD v20.5.0 compatible database. This tool helps to upgrade the data from existing GoCD database running on GoCD v20.4.0 (or below) to the GoCD v20.5.0 compatible database.  
+* Migrates data from older GoCD database to the GoCD `v20.5.0` compatible database. This tool helps to upgrade the data from existing GoCD database running on GoCD `v20.4.0` (or below) to the GoCD `v20.5.0` compatible database.  
 
-* Convert/Sync data from one database to another. This allows GoCD users to switch from any of the existing database to `H2`, `PostgreSQL` and `MySQL` database.
+* Convert/Sync data from one database to another. This allows GoCD users to switch from any of the existing database to `H2`, `PostgreSQL` or `MySQL` database.
 
 
 ## Usage
 
-1. Download `gocd-db-migrator.tgz` tool from [Github releases]().
+1. Download latest `gocd-db-migrator.tgz` from [Github releases](https://github.com/gocd-private/gocd-db-migration/releases).
 
 2. Extract the downloaded tar file.
 
@@ -34,14 +34,9 @@ Know more about GoCD support for multiple databases at [GoCD open sources Postgr
     
     3.3 Visit [dev.mysql.com](https://dev.mysql.com/doc/refman/5.7/en/create-database.html) for creating a new MySQL database.
 
-4. Migrate the data from existing database to the newly created database using `gocd-db-migrator` command.
-
-```shell
-./bin/gocd-h2-db-export \
-    --insert \
-    --source-db-url='jdbc:h2:~/tmp/backup/cruise' \
-    --target-db-url='jdbc:h2:~/projects/gocd/gocd/server/db/h2db/cruise'
-```
+4. Migrate the data from existing database to the newly created database using `gocd-db-migrator` command. 
+    Refer [Command Arguments](#command-arguments) for specifying options `gocd-db-migrator` tool.
+    And, refer [examples](#some-example-usages) for data migration.
 
 # Command Arguments:
 
@@ -84,16 +79,28 @@ When no database driver is specified for the soruce database (`--source-db-drive
 
     ```shell
     ./bin/gocd-h2-db-export \
-            --source-db-url='jdbc:h2:~/tmp/backup/cruise' \
-            --target-db-url='jdbc:h2:~/projects/gocd/gocd/server/db/h2db/cruise'
+            --insert \
+            --progress \
+            --source-db-url='jdbc:h2:/godata/backup/db/h2db/cruise' \
+            --source-db-user='sa' \
+            --source-db-user='sa-password' \
+            --target-db-url='jdbc:h2:/var/lib/gocd/new-database/db/h2db/cruise' \
+            --target-db-user='target-sa' \
+            --target-db-user='target-sa-password' 
     ``` 
 
 - Sync data from H2 to PostgreSQL
 
     ```shell
     ./bin/gocd-h2-db-export \
-            --source-db-url='jdbc:h2:~/tmp/backup/cruise' \
-            --target-db-url='=jdbc:postgresql://localhost/gocd'
+            --insert \
+            --progress \
+            --source-db-url='jdbc:h2:/godata/backup/db/h2db/cruise' \
+            --source-db-user='sa' \
+            --source-db-user='sa-password' \
+            --target-db-url='jdbc:postgresql:localhost/cruise' \
+            --target-db-user='postgres' \
+            --target-db-user='postgres-password' 
     ``` 
 
 ## License
