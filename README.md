@@ -98,7 +98,7 @@ When no database driver is specified for the soruce database (`--source-db-drive
             --source-db-url='jdbc:h2:/godata/backup/db/h2db/cruise' \
             --source-db-user='sa' \
             --source-db-user='sa-password' \
-            --target-db-url='jdbc:postgresql:localhost/cruise' \
+            --target-db-url='jdbc:postgresql://localhost:5432/cruise' \
             --target-db-user='postgres' \
             --target-db-user='postgres-password' 
     ``` 
