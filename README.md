@@ -47,12 +47,33 @@ Know more about GoCD support for multiple databases at [GoCD open sources Postgr
 
 # Command Arguments:
 
-| Argument                   | Description                                                                                             |
-|:-------------------------- |:------------------------------------------------------------------------------------------------------- |
-| `--source-db-url`          | The source database url. Specify the existing GoCD database url. <br/> When none specified, it will default to looking up `cruise.h2.db` in the current directory. <br/><br/> **Default:** `jdbc:h2:cruise` <br/><br/> **Example Database URLs:** <br/>  - H2: `jdbc:h2:/path/to/cruise` (Note: this is the path without the `.db` extension.) <br/> - PostgreSQL: `jdbc:postgresql://localhost:5432/cruise` <br/> - MySQL: `jdbc:mysql://localhost:3306/cruise` <br/> |
-|   |   |
-| `--source-db-driver-class` | The source database driver class. <br/> When none specified, based on the specified `--source-db-url` it will choose the appropriate driver class. <br/> **Default:** <br/> - `jdbc:h2:<url>`         - `org.h2.Driver` <br/> - `jdbc:postgresql:<url>` - `org.postgresql.Driver` <br/> - `jdbc:mysql:<url>`      - `com.mysql.cj.jdbc.Driver` <br/> |
-|   |   |
+| Argument                            | Description                                                                                             |
+|:----------------------------------- |:------------------------------------------------------------------------------------------------------- |
+| `--source-db-url`                   | The source database url. Specify the existing GoCD database url. <br/> When none specified, it will default to looking up `cruise.h2.db` in the current directory. See [Example database connection URLs](#example-database-connection-urls). |
+| `--source-db-driver-class`          | The source database driver class. <br/> When none specified, based on the specified `--source-db-url` it will choose the appropriate driver class. See [Default database driver class](default-database-driver-class). |
+| `--source-db-user`                  | The username of the source database. |
+| `--source-db-password`              | The password of the source database. |
+| `--target-db-url`                   | The target database url. Specify the newly created database url, where the data will be copied. See [Example database connection URLs](#example-database-connection-urls). |
+| `--taregt-db-driver-class`          | The target database driver class. <br/> When none specified, based on the specified `--target-db-url` it will choose the appropriate driver class. See [Default database driver class](default-database-driver-class). |
+| `--target-db-user`                  | The username of the target database. |
+| `--target-db-password`              | The password of the target database. |
+
+
+## Example database connection URLs:
+Some example database URLs that the tool understands:
+
+- H2 URL:         `jdbc:h2:/path/to/cruise` (this is the H2 database path without the `.db` extension)
+- PostgreSQL URL: `jdbc:postgresql://localhost:5432/gocd`
+- MySQL URL:      `jdbc:mysql://localhost:3306/gocd` 
+ 
+
+## Default database driver class:
+When no database driver is specified for the soruce database (`--source-db-driver-class`) or the taregt database (`--target-db-driver-class`), based on the specified database url, the tool will choose the appropriate driver class.
+
+- For H2 database urls (starting with `jdbc:h2:`), database driver is set to `org.h2.Driver`.
+- For PostgreSQL database urls (starting with `jdbc:postgresql:`), database driver is set to `org.postgresql.Driver`.
+- For MySQL database urls (starting with `jdbc:mysql:`), database driver is set to `com.mysql.cj.jdbc.Driver`.
+ 
 
 # Some example usages:
 
