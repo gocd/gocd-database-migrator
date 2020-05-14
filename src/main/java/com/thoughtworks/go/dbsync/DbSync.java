@@ -220,7 +220,7 @@ public class DbSync {
     private void executeLiquibaseWithContext(DataSource targetDataSource, Writer writer, String contexts) throws IOException, LiquibaseException, JoranException {
 
         if (!isBlank(args.outputFile)) {
-            File tempFile = File.createTempFile("updateSQL", "sql");
+            File tempFile = File.createTempFile("updateSQL", ".sql");
             Main.run(new String[]{
                     "--logLevel=off",
                     String.format("--url=%s", this.args.targetDbUrl),
@@ -229,7 +229,7 @@ public class DbSync {
                     String.format("--password=%s", this.args.targetDbPassword),
                     String.format("--outputFile=%s", tempFile.getAbsolutePath()),
                     String.format("--contexts=%s", contexts),
-                    "updateSQL"
+                    "update"
             });
 
             String sql = FileUtils.readFileToString(tempFile, StandardCharsets.UTF_8);
