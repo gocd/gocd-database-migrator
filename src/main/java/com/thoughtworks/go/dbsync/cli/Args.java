@@ -57,7 +57,7 @@ public class Args {
     @Parameter(names = {"--insert", "-i"}, description = "Perform INSERT into target database.", order = 1200)
     public boolean insert;
 
-    @Parameter(names = {"--progress", "-p"}, description = "Show progress", order = 1300)
+    @Parameter(names = {"--progress", "-p"}, description = "Show progress of the export operation", order = 1300)
     public boolean progress = false;
 
     @Parameter(names = {"--threads", "-t"}, description = "Number of import threads. Defaults to number of processors (max of 8).", order = 1400)

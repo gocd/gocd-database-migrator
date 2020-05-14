@@ -57,6 +57,11 @@ Know more about GoCD support for multiple databases at [GoCD open sources Postgr
 | `taregt-db-driver-class`     | The target database driver class. <br/> When none specified, based on the specified `--target-db-url` it will choose the appropriate driver class. See [Default database driver class](default-database-driver-class). |
 | `target-db-user`             | The username of the target database. |
 | `target-db-password`         | The password of the target database. |
+| `batch-size`                 | The number of records to SELECT from source database and INSERT into target database in each batch. <br/> **Default:** 100000 |
+| `output`                     | The output SQL file. Specify `.gz` extension to enable gzip compression. |
+| `insert`                     | Perform INSERT into target database. <br/> **Default:** false |
+| `progress`                   | Show progress of the export operation. <br/> **Default:** false |
+| `threads`                    | Number of import threads. Defaults to number of processors (max of 8). <br/> **Default:** 8 |
 
 
 ## Example database connection URLs:
