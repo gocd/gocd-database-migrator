@@ -365,7 +365,7 @@ public class DbSync {
     }
 
     private static Map<String, Integer> listTables(BasicDataSource sourceDataSource) {
-        Map<Integer, String> tablesOrderedBySize = new TreeMap<>();
+        Map<String, Integer> tables = new LinkedHashMap<>();
 
         withDataSource(sourceDataSource, (connection) -> {
             Field<String> field = field("TABLE_NAME", String.class);
@@ -378,13 +378,11 @@ public class DbSync {
             for (Record1<String> record : result) {
                 String value = record.getValue(field);
                 if (!value.equalsIgnoreCase("CHANGELOG")) {
-                    tablesOrderedBySize.put(using(connection).fetchCount(table(value)), value);
+                    tables.put(value, using(connection).fetchCount(table(value)));
                 }
             }
         });
 
-        Map<String, Integer> tables = new LinkedHashMap<>();
-        tablesOrderedBySize.forEach((size, tableName) -> tables.put(tableName, size));
         return tables;
     }
 
