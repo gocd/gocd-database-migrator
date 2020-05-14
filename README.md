@@ -47,16 +47,16 @@ Know more about GoCD support for multiple databases at [GoCD open sources Postgr
 
 # Command Arguments:
 
-| Argument                            | Description                                                                                             |
+| Argument &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | Description                                                                                             |
 |:----------------------------------- |:------------------------------------------------------------------------------------------------------- |
-| `--source-db-url`                   | The source database url. Specify the existing GoCD database url. <br/> When none specified, it will default to looking up `cruise.h2.db` in the current directory. See [Example database connection URLs](#example-database-connection-urls). |
-| `--source-db-driver-class`          | The source database driver class. <br/> When none specified, based on the specified `--source-db-url` it will choose the appropriate driver class. See [Default database driver class](default-database-driver-class). |
-| `--source-db-user`                  | The username of the source database. |
-| `--source-db-password`              | The password of the source database. |
-| `--target-db-url`                   | The target database url. Specify the newly created database url, where the data will be copied. See [Example database connection URLs](#example-database-connection-urls). |
-| `--taregt-db-driver-class`          | The target database driver class. <br/> When none specified, based on the specified `--target-db-url` it will choose the appropriate driver class. See [Default database driver class](default-database-driver-class). |
-| `--target-db-user`                  | The username of the target database. |
-| `--target-db-password`              | The password of the target database. |
+| `source-db-url`              | The source database url. Specify the existing GoCD database url. <br/> When none specified, it will default to looking up `cruise.h2.db` in the current directory. See [Example database connection URLs](#example-database-connection-urls). |
+| `source-db-driver-class`     | The source database driver class. <br/> When none specified, based on the specified `--source-db-url` it will choose the appropriate driver class. See [Default database driver class](default-database-driver-class). |
+| `source-db-user`             | The username of the source database. |
+| `source-db-password`         | The password of the source database. |
+| `target-db-url`              | The target database url. Specify the newly created database url, where the data will be copied. See [Example database connection URLs](#example-database-connection-urls). |
+| `taregt-db-driver-class`     | The target database driver class. <br/> When none specified, based on the specified `--target-db-url` it will choose the appropriate driver class. See [Default database driver class](default-database-driver-class). |
+| `target-db-user`             | The username of the target database. |
+| `target-db-password`         | The password of the target database. |
 
 
 ## Example database connection URLs:
