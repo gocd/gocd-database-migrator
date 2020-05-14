@@ -49,9 +49,9 @@ Know more about GoCD support for multiple databases at [GoCD open sources Postgr
 
 | Argument                   | Description                                                                                             |
 |:-------------------------- |:------------------------------------------------------------------------------------------------------- |
-| `--source-db-url`          | The source database url. Specify the existing GoCD database url. <br/> When none specified, it will default to looking up `cruise.h2.db` in the current directory. <br/> **Default:** `jdbc:h2:cruise` |
+| `--source-db-url`          | The source database url. Specify the existing GoCD database url. <br/> When none specified, it will default to looking up `cruise.h2.db` in the current directory. <br/> **Default:** `jdbc:h2:cruise` <br/> **Example Database URLs:** <br/>  - **H2:** `jdbc:h2:/path/to/cruise` (Note: this is the path without the `.db` extension.) <br/> - **PostgreSQL:** `jdbc:postgresql://localhost:5432/cruise` <br/> - **MySQL:** `jdbc:mysql://localhost:3306/cruise` <br/> |
 |   |   |
-| `--source-db-driver-class` | The source database driver class. <br/> When none specified, based on the specified --source-db-url it will choose the appropriate driver class. |
+| `--source-db-driver-class` | The source database driver class. <br/> When none specified, based on the specified `--source-db-url` it will choose the appropriate driver class. |
 
 
 # Some example usages:
