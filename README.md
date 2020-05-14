@@ -33,8 +33,6 @@ Know more about GoCD support for multiple databases at [GoCD open sources Postgr
     3.2 Visit [www.postgresql.org](https://www.postgresql.org/docs/9.6/sql-createdatabase.html) for creating a new PostgreSQL database.
     
     3.3 Visit [dev.mysql.com](https://dev.mysql.com/doc/refman/5.7/en/create-database.html) for creating a new MySQL database.
-    
--- GANESHPL: do we need to create user and all?? any specific permissions?? --
 
 4. Migrate the data from existing database to the newly created database using `gocd-db-migrator` command.
 
@@ -50,11 +48,11 @@ Know more about GoCD support for multiple databases at [GoCD open sources Postgr
 | Argument &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | Description                                                                                             |
 |:----------------------------------- |:------------------------------------------------------------------------------------------------------- |
 | `source-db-url`              | The source database url. Specify the existing GoCD database url. <br/> When none specified, it will default to looking up `cruise.h2.db` in the current directory. See [Example database connection URLs](#example-database-connection-urls). |
-| `source-db-driver-class`     | The source database driver class. <br/> When none specified, based on the specified `--source-db-url` it will choose the appropriate driver class. See [Default database driver class](default-database-driver-class). |
+| `source-db-driver-class`     | The source database driver class. <br/> When none specified, based on the specified `--source-db-url` it will choose the appropriate driver class. See [Default database driver class](#default-database-driver-class). |
 | `source-db-user`             | The username of the source database. |
 | `source-db-password`         | The password of the source database. |
 | `target-db-url`              | The target database url. Specify the newly created database url, where the data will be copied. See [Example database connection URLs](#example-database-connection-urls). |
-| `taregt-db-driver-class`     | The target database driver class. <br/> When none specified, based on the specified `--target-db-url` it will choose the appropriate driver class. See [Default database driver class](default-database-driver-class). |
+| `taregt-db-driver-class`     | The target database driver class. <br/> When none specified, based on the specified `--target-db-url` it will choose the appropriate driver class. See [Default database driver class](#default-database-driver-class). |
 | `target-db-user`             | The username of the target database. |
 | `target-db-password`         | The password of the target database. |
 | `batch-size`                 | The number of records to SELECT from source database and INSERT into target database in each batch. <br/> **Default:** 100000 |
