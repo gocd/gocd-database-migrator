@@ -292,6 +292,7 @@ public class DbSync {
 
                     executeAndLog(targetDataSource, writer, sql, args.insert);
                 }
+                break;
             default:
                 throw new UnsupportedOperationException("Database " + dialect.family() + " is not supported");
 
