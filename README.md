@@ -45,6 +45,15 @@ Know more about GoCD support for multiple databases at [GoCD open sources Postgr
     --target-db-url='jdbc:h2:~/projects/gocd/gocd/server/db/h2db/cruise'
 ```
 
+# Command Arguments:
+
+| Argument                   | Description                                                                                             |
+|:-------------------------- |:------------------------------------------------------------------------------------------------------- |
+| `--source-db-url`          | The source database url. Specify the existing GoCD database url. <br/> When none specified, it will default to looking up `cruise.h2.db` in the current directory. <br/> **Default:** `jdbc:h2:cruise` |
+|   |   |
+| `--source-db-driver-class` | The source database driver class. <br/> When none specified, based on the specified --source-db-url it will choose the appropriate driver class. |
+
+
 # Some example usages:
 
 - Migrate from an older version of GoCD (which uses an old H2 version) to a newer version that uses a new H2 version.
