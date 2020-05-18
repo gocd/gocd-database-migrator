@@ -141,9 +141,10 @@ public class DbSync {
                         for (String error : errors) {
                             LOG.error("  {}", error);
                         }
+                        System.exit(1);
+                    } else {
+                        LOG.info("All good!");
                     }
-
-                    LOG.info("All good!");
                 });
 
             } catch (Exception e) {
