@@ -77,13 +77,24 @@ public class DbSync {
         withDataSource(targetDataSource, (connection) -> LOG.info("Using dialect {} for target database.", using(connection).dialect()));
 
         withDataSource(sourceDataSource, (connection -> {
-            LOG.debug("Checking if DB contains the changelog table from dbdeploy.");
+            LOG.debug("Checking if source DB contains the changelog table from dbdeploy.");
             if (new DbDeploySchemaVerifier().usesDbDeploy(connection) && isH2OrPostgres()) {
                 LOG.debug("Found changelog table, performing DB migrations using dbdeploy.");
                 String migrationSQL = new DbDeploySchemaMigrator(sourceDataSource, connection).migrationSQL();
                 try (Statement statement = connection.createStatement()) {
                     statement.execute(migrationSQL);
                 }
+            }
+        }));
+
+        withDataSource(targetDataSource, (connection -> {
+            LOG.debug("Checking if target DB is empty.");
+            Map<String, Integer> tables = listTables(targetDataSource);
+
+            if (!tables.isEmpty()) {
+                LOG.error("Specified target DB is not empty. Contains '{}' tables in public schema.", String.join(", ", tables.keySet()));
+                LOG.error("Skipping migration.", String.join(", ", tables.keySet()));
+                System.exit(1);
             }
         }));
 
@@ -374,7 +385,7 @@ public class DbSync {
             Result<Record1<String>> result = using(connection)
                     .select(field)
                     .from("INFORMATION_SCHEMA.tables")
-                    .where("table_schema = 'PUBLIC' and table_type='TABLE'")
+                    .where("table_schema in ('PUBLIC', 'public') and table_type in ('TABLE', 'BASE TABLE')")
                     .fetch();
 
             for (Record1<String> record : result) {
