@@ -135,6 +135,11 @@ public class DbSync {
                 });
 
                 withDataSource(targetDataSource, (targetConection) -> {
+                    if(!args.insert) {
+                        LOG.info("No '--insert' option provided, causing no data insertion on the target database. Skipping data verification on target database.");
+                        return;
+                    }
+
                     LOG.info("Verifying if number of records are identical in source and target.");
                     List<String> errors = new ArrayList<>();
 
