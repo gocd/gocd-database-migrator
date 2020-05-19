@@ -28,7 +28,7 @@ public class Main {
         Args args = new Args();
         JCommander commander = JCommander.newBuilder()
                 .addObject(args)
-                .programName("gocd-h2-db-export")
+                .programName("gocd-database-migrator")
                 .build();
         try {
             commander.parse(argv);

@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-rootProject.name = 'gocd-h2-db-export'
+rootProject.name = 'gocd-database-migrator'

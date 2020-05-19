@@ -16,7 +16,7 @@
   -->
 <configuration>
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>h2-db-export.log</file>
+        <file>gocd-database-migrator.log</file>
         <append>true</append>
         <immediateFlush>true</immediateFlush>
         <encoder>
