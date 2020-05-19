@@ -36,6 +36,7 @@ This will create a directory `gocd-database-migrator-1.0.0` under the current di
 Change into the directory and run `./bin/gocd-database-migrator --help` for usage instructions.
 
 
+~~ TODO: @ganeshpl says DOCKER IS NOT A PRIORITY can be removed ~~
 #### 2. Using Docker Image:
 
 Pull the `GoCD Database Migrator v1.0.0` docker image from [Dockerhub](https://hub.docker.com/) at [gocd/gocd-database-migrator](https://hub.docker.com/r/gocd/gocd-database-migrator).
@@ -54,11 +55,16 @@ $ docker container run gocd/gocd-database-migrator:v1.0.0 --help
 
 ## Usage
 
-1. Backup GoCD database and configurations using [One Click Backup](https://docs.gocd.org/current/advanced_usage/one_click_backup.html) feature of GoCD.
+1. Upgrade the GoCD Server to `GoCD v20.4.0`.
 
-2. Stop the running server.
 
-3. Create a new database of your choice. (where `gocd-database-migrator` will copy the existing data).
+2. Backup GoCD database and configurations using [One Click Backup](https://docs.gocd.org/current/advanced_usage/one_click_backup.html) feature of GoCD.
+
+
+3. Stop the running server.
+
+
+4. Create a new database of your choice. (where `gocd-database-migrator` will copy the existing databse's data).
     
     **NOTE:** _If you wish you change your existing GoCD database from `H2`, `PostreSQL` to any of `H2`, `PosgreSQL`, `MySQL`, please choose to create the database of your choice.
     `gocd-database-migrator` tool has the capability to migrate the data from `H2`, `PostreSQL` to any of `H2`, `PosgreSQL`, `MySQL` database._
@@ -69,10 +75,23 @@ $ docker container run gocd/gocd-database-migrator:v1.0.0 --help
     
     3.3 Visit [dev.mysql.com](https://dev.mysql.com/doc/refman/5.7/en/create-database.html) for creating a new MySQL database.
 
-4. Migrate the data from existing database to the newly created database using `gocd-database-migrator` command. 
+
+5. Migrate the data from existing database to the newly created database using `gocd-database-migrator` command. 
     Refer [Command Arguments](#command-arguments) for specifying options `gocd-database-migrator` tool.
     And, refer [examples](#some-example-usages) for data migration.
 
+
+6. Define new database configurations under `config/db.properties` file. Refer [Location of GoCD server files](https://docs.gocd.org/current/installation/installing_go_server.html) to know the location of GoCD Server `config` directory.
+ 
+    ```properties
+    db.driver=org.postgresql.Driver
+    db.url=jdbc:postgresql://localhost:5432/cruise
+    db.user=postgres
+    ```
+
+    Refer [GoCD database configurations]() to know the full list of configuration properties that can be specified under `config/db.properties`. 
+
+ 
 # Command Arguments:
 
 | Argument &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | Description                                                                                             |
