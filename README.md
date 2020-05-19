@@ -5,6 +5,7 @@ This application helps to migrate the data from older GoCD database to the GoCD 
 
 Know more about GoCD support for multiple databases [here]().
 
+
 ## Features:
 
 * Migrates data from older GoCD database to the GoCD `v20.5.0` compatible database. This tool helps to upgrade the data from existing GoCD database running on GoCD `v20.4.0` (or below) to the GoCD `v20.5.0` compatible database.  
@@ -12,21 +13,55 @@ Know more about GoCD support for multiple databases [here]().
 * Convert/Sync data from one database to another. This allows GoCD users to switch from any of the existing database to `H2`, `PostgreSQL` or `MySQL` database.
 
 
+## Supported Databases
+
+* H2 (`1.3.xxx` and above)
+* PostgreSQL (`9.6` and above)
+* MySQL (`8.0`) 
+
+
+## Installation
+
+#### 1. From The Source:
+
+The `GoCD Database Migrator v1.0.0` sources can be obtained from the [Github Releases](). You should get a file named `gocd-database-migrator-1.0.0.tgz`. 
+After you have downloaded the file, unpack it:
+
+```bash
+$ gunzip gocd-database-migrator-1.0.0.tgz
+$ tar xf gocd-database-migrator-1.0.0.tar
+```
+
+This will create a directory `gocd-database-migrator-1.0.0` under the current directory with the GoCD Database Migrator sources.
+Change into the directory and run `./bin/gocd-database-migrator --help` for usage instructions.
+
+
+#### 2. Using Docker Image:
+
+Pull the `GoCD Database Migrator v1.0.0` docker image from [Dockerhub](https://hub.docker.com/) at [gocd/gocd-database-migrator](https://hub.docker.com/r/gocd/gocd-database-migrator).
+
+```bash
+$ docker pull gocd/gocd-database-migrator:v1.0.0
+```
+
+Run the container from the pulled `gocd/gocd-database-migrator:v1.0.0` docker image. Specify the GoCD Database Migrator command arguments using docker run command.
+
+Example:
+```bash
+$ docker container run gocd/gocd-database-migrator:v1.0.0 --help
+```
+
+
 ## Usage
 
-1. Download latest `gocd-db-migrator.tgz` from [Github releases](https://github.com/gocd-private/gocd-db-migration/releases).
+1. Backup GoCD database and configurations using [One Click Backup](https://docs.gocd.org/current/advanced_usage/one_click_backup.html) feature of GoCD.
 
-2. Extract the downloaded tar file.
+2. Stop the running server.
 
-    ```shell
-    tar -zxf gocd-db-migrator-VERSION.tgz
-    cd gocd-db-migrator
-    ```
-
-3. Create a new database of your choice. (where `gocd-db-migrator` will copy the existing data).
+3. Create a new database of your choice. (where `gocd-database-migrator` will copy the existing data).
     
     **NOTE:** _If you wish you change your existing GoCD database from `H2`, `PostreSQL` to any of `H2`, `PosgreSQL`, `MySQL`, please choose to create the database of your choice.
-    `gocd-db-migrator` tool has the capability to migrate the data from `H2`, `PostreSQL` to any of `H2`, `PosgreSQL`, `MySQL` database._
+    `gocd-database-migrator` tool has the capability to migrate the data from `H2`, `PostreSQL` to any of `H2`, `PosgreSQL`, `MySQL` database._
 
     3.1 Visit [www.h2database.com](http://www.h2database.com/html/quickstart.html) for creating a new H2 database.
 
@@ -34,14 +69,14 @@ Know more about GoCD support for multiple databases [here]().
     
     3.3 Visit [dev.mysql.com](https://dev.mysql.com/doc/refman/5.7/en/create-database.html) for creating a new MySQL database.
 
-4. Migrate the data from existing database to the newly created database using `gocd-db-migrator` command. 
-    Refer [Command Arguments](#command-arguments) for specifying options `gocd-db-migrator` tool.
+4. Migrate the data from existing database to the newly created database using `gocd-database-migrator` command. 
+    Refer [Command Arguments](#command-arguments) for specifying options `gocd-database-migrator` tool.
     And, refer [examples](#some-example-usages) for data migration.
 
 # Command Arguments:
 
 | Argument &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | Description                                                                                             |
-|:----------------------------------- |:------------------------------------------------------------------------------------------------------- |
+|:---------------------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `source-db-url`              | The source database url. Specify the existing GoCD database url. <br/> When none specified, it will default to looking up `cruise.h2.db` in the current directory. See [Example database connection URLs](#example-database-connection-urls). |
 | `source-db-driver-class`     | The source database driver class. <br/> When none specified, based on the specified `--source-db-url` it will choose the appropriate driver class. See [Default database driver class](#default-database-driver-class). |
 | `source-db-user`             | The username of the source database. |
@@ -78,7 +113,7 @@ When no database driver is specified for the soruce database (`--source-db-drive
 - Migrate from an older version of GoCD (which uses an old H2 version) to a newer version that uses a new H2 version.
 
     ```shell
-    ./bin/gocd-h2-db-export \
+    ./bin/gocd-database-migrator \
             --insert \
             --progress \
             --source-db-url='jdbc:h2:/godata/backup/db/h2db/cruise' \
@@ -92,7 +127,7 @@ When no database driver is specified for the soruce database (`--source-db-drive
 - Sync data from H2 to PostgreSQL
 
     ```shell
-    ./bin/gocd-h2-db-export \
+    ./bin/gocd-database-migrator \
             --insert \
             --progress \
             --source-db-url='jdbc:h2:/godata/backup/db/h2db/cruise' \
