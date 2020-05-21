@@ -55,7 +55,9 @@ $ docker container run gocd/gocd-database-migrator:v1.0.0 --help
 
 ## Usage
 
-1. Upgrade the GoCD Server to `GoCD v20.4.0`.
+1. [_Optional_] Upgrade the GoCD Server to `GoCD v20.4.0`.
+    
+    `GoCD Database Migrator` tool has the ability to migrate the database from any version of GoCD (prior to `v20.4.0`) to `v20.5.0`. GoCD has done undergone serveral breaking changes every release, hence its recommended to upgrade your existing GoCD instance to `v20.4.0` and then perform data migration. 
 
 
 2. Backup GoCD database and configurations using [One Click Backup](https://docs.gocd.org/current/advanced_usage/one_click_backup.html) feature of GoCD.
@@ -89,7 +91,14 @@ $ docker container run gocd/gocd-database-migrator:v1.0.0 --help
     db.user=postgres
     ```
 
-    Refer [GoCD database configurations]() to know the full list of configuration properties that can be specified under `config/db.properties`. 
+    Refer [GoCD database property configurations](provide-link-to-docs) to know the full list of configuration properties that can be specified under `config/db.properties`. 
+
+
+7. [_Only for existing PostgreSQL users_] Remove `config/postgresqldb.properties` properties file and PostgreSQL addon from addons directory.
+
+
+8. Start GoCD Server.
+
 
  
 # Command Arguments:
