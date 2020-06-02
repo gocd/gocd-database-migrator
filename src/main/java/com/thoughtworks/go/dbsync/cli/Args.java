@@ -25,7 +25,7 @@ public class Args {
     public boolean help;
 
     @Parameter(names = "--source-db-url", description = "The source database url. Specify the existing GoCD database url. When none specified, it will default to looking up `cruise.h2.db` in the current directory.", order = 200)
-    public String sourceDbUrl = "jdbc:h2:cruise";
+    public String sourceDbUrl = "jdbc:h2:./cruise";
 
     @Parameter(names = "--source-db-driver-class", description = "The source database driver class. When none specified, based on the specified --source-db-url it will choose the appropriate driver class.", order = 300)
     public String sourceDbDriverClass;
