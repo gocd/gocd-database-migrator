@@ -91,10 +91,10 @@
     <property name="index.modifications.revisions.columnName" value="REVISION(64)" dbms="mysql"/>
 
 
-    <include file="initial/initialize.xml" relativeToChangelogFile="true" context="createSchema"/>
-    <include file="initial/create-schema.xml" relativeToChangelogFile="true" context="createSchema"/>
+    <include file="db-migration-scripts/initial/initialize.xml" relativeToChangelogFile="true" context="createSchema"/>
+    <include file="db-migration-scripts/initial/create-schema.xml" relativeToChangelogFile="true" context="createSchema"/>
 
-    <include file="initial/create-index.xml" relativeToChangelogFile="true" context="createIndex"/>
-    <include file="initial/create-view.xml" relativeToChangelogFile="true" context="createView"/>
-    <include file="initial/create-trigger.xml" relativeToChangelogFile="true" context="createTrigger"/>
+    <include file="db-migration-scripts/initial/create-index.xml" relativeToChangelogFile="true" context="createIndex"/>
+    <include file="db-migration-scripts/initial/create-view.xml" relativeToChangelogFile="true" context="createView"/>
+    <include file="db-migration-scripts/initial/create-trigger.xml" relativeToChangelogFile="true" context="createTrigger"/>
 </databaseChangeLog>
