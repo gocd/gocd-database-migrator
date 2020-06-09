@@ -18,13 +18,26 @@ plugins {
     id 'se.patrikerdes.use-latest-versions' version '0.2.13'
     id 'com.github.ben-manes.versions' version '0.28.0'
     id "com.github.jk1.dependency-license-report" version "1.13"
+    id "co.riiid.gradle" version "0.4.2"
 }
 
 apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: "com.github.jk1.dependency-license-report"
 
+group = 'cd.go.gocd'
 version = '0.0.1'
+
+project.ext.projectDesc = [
+  id         : 'cd.go.gocd.gocd-database-migrator',
+  repo       : 'gocd-database-migrator',
+  version    : project.version,
+  name       : 'GoCD Database Migrator',
+  description: 'Tool to help migrator pre-20.5.0 databases to 20.5.0 database.',
+  vendorName : 'GoCD Contributors',
+  vendorUrl  : 'https://github.com/gocd/gocd-database-migrator'
+]
+
 
 repositories {
     mavenCentral()
@@ -99,3 +112,20 @@ distributions {
 distTar {
     compression = Compression.GZIP
 }
+
+tasks.withType(AbstractArchiveTask) { archiveTask ->
+    includeEmptyDirs false
+    duplicatesStrategy DuplicatesStrategy.EXCLUDE
+
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+
+    ['MD5', 'SHA1', 'SHA-256'].each { algo ->
+        archiveTask.outputs.files("${archiveTask.archivePath}.${algo}")
+        archiveTask.doLast {
+            ant.checksum file: archiveTask.archivePath, format: 'MD5SUM', algorithm: algo
+        }
+    }
+}
+
+apply from: 'plugin-tasks.gradle'
