@@ -98,11 +98,11 @@ distributions {
                 into "licenses"
             }
 
-            from("src/main/h2deltas") {
+            from("src/main/resources/h2deltas") {
                 into "h2deltas"
             }
 
-            from("src/main/pgdeltas") {
+            from("src/main/resources/pgdeltas") {
                 into "pgdeltas"
             }
         }

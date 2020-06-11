@@ -21,18 +21,11 @@ import net.sf.dbdeploy.database.syntax.DbmsSyntax;
 import net.sf.dbdeploy.database.syntax.HsqlDbmsSyntax;
 import net.sf.dbdeploy.exceptions.DbDeployException;
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class DbDeploySchemaMigrator {
     private final BasicDataSource sourceDataSource;
@@ -44,26 +37,11 @@ public class DbDeploySchemaMigrator {
     }
 
     public String migrationSQL() throws SQLException, DbDeployException, IOException, ClassNotFoundException {
-        File deltas = Files.createTempDirectory("deltas").toFile();
-        try {
-            InMemory inMemory = new InMemory(sourceDataSource, dbms(), extractDeltas(deltas), "DDL");
-            return inMemory.migrationSql();
-        } finally {
-            FileUtils.forceDelete(deltas);
-        }
-    }
+        String deltasFolder = isH2() ? "h2deltas" : "pgdeltas";
 
-    private File extractDeltas(File deltas) throws SQLException, IOException {
-        String sourceDir = isH2() ? "/h2deltas/" : "/pgdeltas/";
+        InMemory inMemory = new InMemory(sourceDataSource, dbms(), new File(deltasFolder), "DDL");
 
-        try (InputStream resourceAsStream = getClass().getResourceAsStream(sourceDir)) {
-            List<String> fileNames = IOUtils.readLines(resourceAsStream, UTF_8);
-            for (String fileName : fileNames) {
-                FileUtils.copyURLToFile(getClass().getResource(sourceDir + fileName), new File(deltas, fileName));
-            }
-        }
-
-        return deltas;
+        return inMemory.migrationSql();
     }
 
     private DbmsSyntax dbms() throws SQLException {
