@@ -33,7 +33,7 @@ GoCD.script {
               elasticProfileId = "ecs-gocd-dev-build-dind"
               tasks {
                 exec {
-                  commandLine = ['./gradlew', 'clean', 'check']
+                  commandLine = ['./gradlew', 'clean', 'check', 'assembleDist']
                   runIf = 'passed'
                 }
               }
@@ -44,7 +44,7 @@ GoCD.script {
         stage("github-preview-release") {
           fetchMaterials = true
           environmentVariables = [
-            GITHUB_USER : 'gocd-database-migrator',
+            GITHUB_USER : 'gocd',
             GITHUB_TOKEN: "{{SECRET:[build-pipelines][GOCD_CI_USER_RELEASE_TOKEN]}}"
           ]
           jobs {
@@ -63,7 +63,7 @@ GoCD.script {
         stage("github-release") {
           fetchMaterials = true
           environmentVariables = [
-            GITHUB_USER : 'gocd-database-migrator',
+            GITHUB_USER : 'gocd',
             PRERELEASE  : "NO",
             GITHUB_TOKEN: "{{SECRET:[build-pipelines][GOCD_CI_USER_RELEASE_TOKEN]}}"
           ]
