@@ -25,6 +25,12 @@ static String gitRevision() {
   return process.text.stripIndent().trim()
 }
 
+static String distVersion() {
+  def process = "git rev-list HEAD".execute()
+  process.waitFor()
+  return process.text.stripIndent().trim().split("\n").size()
+}
+
 static def getLastTag(boolean isExperimental) {
   try {
     def command = ["git", "describe", "--tags", "--abbrev=0"]
@@ -72,6 +78,7 @@ static String readableFileSize(long size) {
 
 project.ext.git = {
   gitRevision = this.&gitRevision
+  distVersion = this.&distVersion
   getLastTag = this.&getLastTag
   getCommitsSinceLastTag = this.&getCommitsSinceLastTag
   readableFileSize = this.&readableFileSize
@@ -83,9 +90,10 @@ task previewGithubRelease() {
     def lastTag = project.git.getLastTag(prerelease)
     def targetCommitish = project.git.gitRevision()
     def assets = distZip.outputs.files.files + distTar.outputs.files.files
-    def tagName = "${project.version}${prerelease ? '-exp' : ''}"
+    def fullVersion = project.git.distVersion() ? "${project.version}-${project.git.distVersion()}" : project.version
+    def tagName = "${fullVersion}${prerelease ? '-exp' : ''}"
 
-    def releaseName = "${prerelease ? 'Experimental: ' : ''}${project.version}"
+    def releaseName = "${prerelease ? 'Experimental: ' : ''}${fullVersion}"
     def changelogHeader = lastTag ? "### Changelog ${lastTag}..${targetCommitish.substring(0, 7)}" : "### Changelog"
     def changes = project.git.getCommitsSinceLastTag(lastTag).replaceAll("\"", "").stripIndent().trim()
 
@@ -137,8 +145,9 @@ github {
   assets = distZip.outputs.files.files + distTar.outputs.files.files
 
   prerelease = !"No".equalsIgnoreCase(System.getenv('PRERELEASE'))
-  tagName = "${project.version}${prerelease ? '-exp' : ''}"
-  name = "${prerelease ? 'Experimental: ' : ''}${project.version}"
+  def fullVersion = project.git.distVersion() ? "${project.version}-${project.git.distVersion()}" : project.version
+  tagName = "${fullVersion}${prerelease ? '-exp' : ''}"
+  name = "${prerelease ? 'Experimental: ' : ''}${fullVersion}"
   def lastTag = project.git.getLastTag(prerelease)
   def changelogHeader = lastTag ? "### Changelog ${lastTag}..${lastCommit.substring(0, 7)}" : "### Changelog"
   def changeLog = project.git.getCommitsSinceLastTag(lastTag).replaceAll("\"", "")
