@@ -86,7 +86,7 @@ task previewGithubRelease() {
     def tagName = "${project.version}${prerelease ? '-exp' : ''}"
 
     def releaseName = "${prerelease ? 'Experimental: ' : ''}${project.version}"
-    def changelogHeader = lastTag ? "### Changelog ${lastTag}..${lastCommit.substring(0, 7)}" : "### Changelog"
+    def changelogHeader = lastTag ? "### Changelog ${lastTag}..${targetCommitish.substring(0, 7)}" : "### Changelog"
     def changes = project.git.getCommitsSinceLastTag(lastTag).replaceAll("\"", "").stripIndent().trim()
 
     def previewFile = file("${project.buildDir}/preview.html")
