@@ -24,8 +24,13 @@ import org.apache.commons.dbcp2.BasicDataSource;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.SQLException;
+
+import static org.apache.commons.io.FilenameUtils.separatorsToUnix;
 
 public class DbDeploySchemaMigrator {
     private final BasicDataSource sourceDataSource;
@@ -36,8 +41,8 @@ public class DbDeploySchemaMigrator {
         this.connection = connection;
     }
 
-    public String migrationSQL() throws SQLException, DbDeployException, IOException, ClassNotFoundException {
-        String deltasFolder = isH2() ? "h2deltas" : "pgdeltas";
+    public String migrationSQL() throws SQLException, DbDeployException, IOException, ClassNotFoundException, URISyntaxException {
+        String deltasFolder = deltasFolder();
 
         InMemory inMemory = new InMemory(sourceDataSource, dbms(), new File(deltasFolder), "DDL");
 
@@ -62,6 +67,12 @@ public class DbDeploySchemaMigrator {
         return connection.getMetaData().getDatabaseProductName().equalsIgnoreCase("H2");
     }
 
+    private String deltasFolder() throws SQLException, URISyntaxException {
+        String folder = isH2() ? "h2deltas" : "pgdeltas";
+        String jarPath = new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParentFile().getParent();
+
+        return URI.create(separatorsToUnix(Paths.get(jarPath, folder).toString())).normalize().toString();
+    }
     public static class PostgreSQLDbmsSyntax extends DbmsSyntax {
         public PostgreSQLDbmsSyntax() {
         }
