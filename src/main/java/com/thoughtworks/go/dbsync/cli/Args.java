@@ -55,7 +55,7 @@ public class Args {
     public String outputFile;
 
     @Parameter(names = {"--insert", "-i"}, description = "Perform INSERT into target database.", order = 1200)
-    public boolean insert = true;
+    public boolean insert = false;
 
     @Parameter(names = {"--progress", "-p"}, description = "Show progress of the export operation", order = 1300)
     public boolean progress = false;
