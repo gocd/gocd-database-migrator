@@ -26,7 +26,7 @@ apply plugin: 'application'
 apply plugin: "com.github.jk1.dependency-license-report"
 
 group = 'cd.go.gocd'
-version = '0.0.1'
+version = '1.0.0'
 
 project.ext.projectDesc = [
   id         : 'cd.go.gocd.gocd-database-migrator',
