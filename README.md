@@ -3,7 +3,7 @@
 GoCD has done several changes to its database implementation in order to build a more flexible model that allowed integrating GoCD with multiple databases.
 This application helps to migrate the data from older GoCD database to the GoCD `v20.5.0` compatible database.
 
-Know more about GoCD support for multiple databases [here]().
+Know more about GoCD support for multiple databases [here](https://docs.gocd.org/20.5.0/installation/configuring_database.html).
 
 
 ## Features:
