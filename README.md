@@ -1,17 +1,18 @@
-# Tool for Migrating GoCD data between H2/PostgreSQL/MySQL
+# Tool for Migrating a GoCD database on version 20.4.0 (or below) to a GoCD 20.5.0 complaint database.
 
-GoCD has done several changes to its database implementation in order to build a more flexible model that allowed integrating GoCD with multiple databases.
-This application helps to migrate the data from older GoCD database to the GoCD `v20.5.0` compatible database.
+GoCD has done several changes in version `v20.5.0` to its database implementation in order to build a more flexible model that allowed integrating GoCD with multiple databases.
+This application helps to migrate the data from older GoCD database `v20.4.0` (or below) to the GoCD `v20.5.0` compatible database.
 
 Know more about GoCD support for multiple databases [here](https://docs.gocd.org/20.5.0/installation/configuring_database.html).
 
 
 ## Features:
 
-* Migrates data from older GoCD database to the GoCD `v20.5.0` compatible database. This tool helps to upgrade the data from existing GoCD database running on GoCD `v20.4.0` (or below) to the GoCD `v20.5.0` compatible database.
+* Migrates data from older GoCD database `v20.4.0` (or below) to the GoCD `v20.5.0` compatible database. This tool helps to upgrade the data from existing GoCD database running on GoCD `v20.4.0` (or below) to the GoCD `v20.5.0` compatible database.
 
-* Convert/Sync data from one database to another. This allows GoCD users to switch from any of the existing database to `H2`, `PostgreSQL` or `MySQL` database.
+* As part of migrating data from a older GoCD `v20.4.0` (or below) to the GoCD `v20.5.0` database, users can convert/sync data from one database to another. This allows GoCD users to switch from any of the existing database to `H2`, `PostgreSQL` or `MySQL` database.
 
+### Note: This tool currently supports only migration of data from older GoCD database `v20.4.0` (or below) to the GoCD `v20.5.0` compatible database. Post migration, you cannot use this tool to sync data between different databases.
 
 ## Supported Databases
 
