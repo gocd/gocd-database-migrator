@@ -27,6 +27,7 @@ import me.tongfei.progressbar.ProgressBarBuilder;
 import me.tongfei.progressbar.ProgressBarStyle;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.io.FileUtils;
+import org.jooq.Record;
 import org.jooq.*;
 import org.jooq.conf.RenderNameStyle;
 import org.jooq.conf.SettingsTools;
@@ -135,7 +136,7 @@ public class DbSync {
                 });
 
                 withDataSource(targetDataSource, (targetConection) -> {
-                    if(!args.insert) {
+                    if (!args.insert) {
                         LOG.info("No '--insert' option provided, causing no data insertion on the target database. Skipping data verification on target database.");
                         return;
                     }
