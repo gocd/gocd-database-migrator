@@ -394,9 +394,10 @@ public class DbSync {
                     .fetch();
 
             for (Record1<String> record : result) {
-                String value = record.getValue(field);
-                if (!value.equalsIgnoreCase("CHANGELOG")) {
-                    tables.put(value, using(connection).fetchCount(table(value)));
+                String tableName = record.getValue(field);
+
+                if (!isChangeLogTable(tableName)) {
+                    tables.put(tableName, using(connection).fetchCount(table(tableName)));
                 }
             }
         });
@@ -404,4 +405,9 @@ public class DbSync {
         return tables;
     }
 
+    private static boolean isChangeLogTable(String tableName) {
+        return tableName.equalsIgnoreCase("CHANGELOG") ||
+                tableName.equalsIgnoreCase("DATABASECHANGELOG") ||
+                tableName.equalsIgnoreCase("DATABASECHANGELOGLOCK");
+    }
 }
