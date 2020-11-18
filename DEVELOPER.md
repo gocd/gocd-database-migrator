@@ -14,11 +14,11 @@
 5. Move the files from `create-{index,schema,view}.xml` from `generated` dir into the `resources` dir.
 6. Ensure that the `left-over.xml` file contains no nodes.
 7. Run a diff of the XML files to make sure changes look OK. Some changes to `create-view.xml` may need to be fixed by hand (remove quotes, fix some join queries, etc)
-8. Package and bundle the distribution `./gradlew clean assemble`
+8. Package and bundle the distribution `./gradlew clean assembleDist`
 
 
 # Building the distribution
 
 ```shell
-./gradlew clean assemble
+./gradlew clean assembleDist
 ```
