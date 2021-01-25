@@ -13,7 +13,7 @@ Know more about GoCD support for multiple databases [here](https://docs.gocd.org
 * As part of migrating data from a older GoCD `v20.4.0` (or below) to the GoCD `v20.5.0` database, users can convert/sync data from one database to another. This allows GoCD users to switch from any of the existing database to `H2`, `PostgreSQL` or `MySQL` database.
 
 * For databases which are already migrated and are GoCD `v20.5.0` compliant, this tool can be used to sync data to a new database post the initial migration to GoCD `v20.5.0`.
-E.g Sync data from a GoCD `v20.5.0` H2 database to a new PostgreSQL database. Verifyied to work till GoCD `v20.8.0`.
+E.g Sync data from a GoCD `v20.5.0` H2 database to a new PostgreSQL database. Verified to work till GoCD `v20.8.0`.
 
 ## Supported Databases
 
@@ -25,7 +25,7 @@ E.g Sync data from a GoCD `v20.5.0` H2 database to a new PostgreSQL database. Ve
 
 #### 1. From The Source:
 
-The `GoCD Database Migrator v1.0.0` sources can be obtained from the [Github Releases](). You should get a file named `gocd-database-migrator-1.0.0.tgz`.
+The `GoCD Database Migrator v1.0.0` sources can be obtained from the [GitHub Releases](). You should get a file named `gocd-database-migrator-1.0.0.tgz`.
 After you have downloaded the file, unpack it:
 
 ```bash
@@ -50,7 +50,7 @@ Follow detailed instructions in [Upgrading to GoCD 20.5.0](https://docs.gocd.org
 | `source-db-user`             | The username of the source database. |
 | `source-db-password`         | The password of the source database. |
 | `target-db-url`              | The target database url. Specify the newly created database url where the data will be copied. See [Example database connection URLs](#example-database-connection-urls). |
-| `taregt-db-driver-class`     | The target database driver class. <br/> If none specified, it will choose the appropriate driver class based on the specified `--target-db-url`. See [Default database driver class](#default-database-driver-class). |
+| `target-db-driver-class`     | The target database driver class. <br/> If none specified, it will choose the appropriate driver class based on the specified `--target-db-url`. See [Default database driver class](#default-database-driver-class). |
 | `target-db-user`             | The username of the target database. |
 | `target-db-password`         | The password of the target database. |
 | `batch-size`                 | The number of records to `SELECT` from the source database to `INSERT` into the target database in each batch. <br/> **Default:** 100000 |
@@ -69,7 +69,7 @@ Some example database URLs that the tool understands:
 
 
 ## Default database driver class:
-When no database driver is specified for the soruce database (`--source-db-driver-class`) or the taregt database (`--target-db-driver-class`), based on the specified database url, the tool will choose the appropriate driver class.
+When no database driver is specified for the source database (`--source-db-driver-class`) or the target database (`--target-db-driver-class`), based on the specified database url, the tool will choose the appropriate driver class.
 
 - For H2 database urls (starting with `jdbc:h2:`), database driver is set to `org.h2.Driver`.
 - For PostgreSQL database urls (starting with `jdbc:postgresql:`), database driver is set to `org.postgresql.Driver`.
@@ -89,7 +89,7 @@ When no database driver is specified for the soruce database (`--source-db-drive
             --source-db-user='sa-password' \
             --target-db-url='jdbc:h2:/var/lib/gocd/new-database/db/h2db/cruise' \
             --target-db-user='target-sa' \
-            --target-db-user='target-sa-password'
+            --target-db-password='target-sa-password'
     ```
 
 - Sync data from H2 to PostgreSQL
@@ -103,7 +103,7 @@ When no database driver is specified for the soruce database (`--source-db-drive
             --source-db-user='sa-password' \
             --target-db-url='jdbc:postgresql://localhost:5432/cruise' \
             --target-db-user='postgres' \
-            --target-db-user='postgres-password'
+            --target-db-password='postgres-password'
     ```
 
 ## License
