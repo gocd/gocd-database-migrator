@@ -63,7 +63,7 @@ Follow detailed instructions in [Upgrading to GoCD 20.5.0](https://docs.gocd.org
 ## Example database connection URLs:
 Some example database URLs that the tool understands:
 
-- H2 URL:         `jdbc:h2:/path/to/cruise` (this is the H2 database path without the `.db` extension)
+- H2 URL:         `jdbc:h2:/path/to/cruise` (this is the H2 database path without the `.h2.db` extension)
 - PostgreSQL URL: `jdbc:postgresql://localhost:5432/gocd`
 - MySQL URL:      `jdbc:mysql://localhost:3306/gocd`
 
