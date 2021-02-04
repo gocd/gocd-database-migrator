@@ -45,7 +45,7 @@ Follow detailed instructions in [Upgrading to GoCD 20.5.0](https://docs.gocd.org
 
 | Argument &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | Description                                                                                             |
 |:---------------------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `source-db-url`              | The source database url. Specify the existing GoCD database url. <br/> If none specified, it will default to `cruise.h2.db` in the current directory. See [Example database connection URLs](#example-database-connection-urls). |
+| `source-db-url`              | The source database url. Specify the existing GoCD database url. <br/> If none specified, it will default to `cruise` (this is the H2 database file without the `.h2.db` extension) in the current directory. See [Example database connection URLs](#example-database-connection-urls). |
 | `source-db-driver-class`     | The source database driver class. <br/> If none specified, it will choose the appropriate driver class based on the specified `--source-db-url`. See [Default database driver class](#default-database-driver-class). |
 | `source-db-user`             | The username of the source database. |
 | `source-db-password`         | The password of the source database. |
