@@ -86,7 +86,7 @@ When no database driver is specified for the source database (`--source-db-drive
             --progress \
             --source-db-url='jdbc:h2:/godata/backup/db/h2db/cruise' \
             --source-db-user='sa' \
-            --source-db-user='sa-password' \
+            --source-db-password='sa-password' \
             --target-db-url='jdbc:h2:/var/lib/gocd/new-database/db/h2db/cruise' \
             --target-db-user='target-sa' \
             --target-db-password='target-sa-password'
@@ -100,7 +100,7 @@ When no database driver is specified for the source database (`--source-db-drive
             --progress \
             --source-db-url='jdbc:h2:/godata/backup/db/h2db/cruise' \
             --source-db-user='sa' \
-            --source-db-user='sa-password' \
+            --source-db-password='sa-password' \
             --target-db-url='jdbc:postgresql://localhost:5432/cruise' \
             --target-db-user='postgres' \
             --target-db-password='postgres-password'
