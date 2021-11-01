@@ -41,7 +41,7 @@ project.ext.projectDesc = [
 
 repositories {
     mavenCentral()
-    maven { url "https://dl.bintray.com/gocd-maven-repo/generic/gocd" }
+    maven { url "https://nexus.gocd.io/repository/gocd-maven-repo" }
 }
 
 dependencies {
