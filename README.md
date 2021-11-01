@@ -1,9 +1,9 @@
-# Tool for Migrating a GoCD database on version 20.4.0 (or below) to a GoCD 20.5.0 complaint database.
+# Tool for Migrating a GoCD database on version 20.4.0 (or below) to a GoCD 20.5.0 compliant database.
 
-GoCD has done several changes in version `v20.5.0` to its database implementation in order to build a more flexible model that allowed integrating GoCD with multiple databases.
+GoCD has made several changes in version `v20.5.0` to its database implementation in order to build a more flexible model that allowed integrating GoCD with multiple databases.
 This application helps to migrate the data from older GoCD database `v20.4.0` (or below) to the GoCD `v20.5.0` compatible database.
 
-Know more about GoCD support for multiple databases [here](https://docs.gocd.org/20.5.0/installation/configuring_database.html).
+Know more about GoCD support for multiple databases [here](https://docs.gocd.org/current/installation/configuring_database.html).
 
 
 ## Features:
