@@ -52,7 +52,7 @@ dependencies {
     implementation group: 'me.tongfei', name: 'progressbar', version: '0.8.1'
     implementation group: 'org.jooq', name: 'jooq', version: '3.13.1'
 
-    implementation group: 'org.liquibase', name: 'liquibase-core', version: '3.8.9'
+    implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.7.1'
     implementation group: 'net.sf', name: 'dbdeploy', version: '2.11.1'
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.19'
     implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
