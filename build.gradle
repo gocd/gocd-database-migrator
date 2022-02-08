@@ -46,7 +46,7 @@ repositories {
 
 dependencies {
     implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
-    implementation group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.7.0'
+    implementation group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.9.0'
 
     implementation group: 'com.beust', name: 'jcommander', version: '1.78'
     implementation group: 'me.tongfei', name: 'progressbar', version: '0.8.1'
