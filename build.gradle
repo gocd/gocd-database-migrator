@@ -54,7 +54,7 @@ dependencies {
 
     implementation group: 'org.liquibase', name: 'liquibase-core', version: '3.8.9'
     implementation group: 'net.sf', name: 'dbdeploy', version: '2.11.1'
-    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.28'
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.29'
     implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.3.2'
 
