@@ -25,7 +25,7 @@ E.g Sync data from a GoCD `v20.5.0` H2 database to a new PostgreSQL database. Ve
 
 #### 1. From The Source:
 
-The `GoCD Database Migrator v1.0.0` sources can be obtained from the [GitHub Releases](). You should get a file named `gocd-database-migrator-1.0.0.tgz`.
+The `GoCD Database Migrator v1.0.0` sources can be obtained from the [GitHub Releases](https://github.com/gocd/gocd-database-migrator/releases). You should get a file named `gocd-database-migrator-1.0.0.tgz`.
 After you have downloaded the file, unpack it:
 
 ```bash
