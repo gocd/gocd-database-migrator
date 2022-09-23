@@ -58,7 +58,7 @@ dependencies {
     implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.3.2'
 
-    testImplementation group: "org.junit.jupiter", name: "junit-jupiter-api", version: "5.8.2"
+    testImplementation group: "org.junit.jupiter", name: "junit-jupiter-api", version: "5.9.1"
     testRuntimeOnly group: "org.junit.jupiter", name: "junit-jupiter-engine", version: "5.8.2"
 }
 
