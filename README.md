@@ -38,7 +38,7 @@ Change into the directory and run `./bin/gocd-database-migrator --help` for usag
 
 ## Databases migration instructions
 
-Follow detailed instructions in [Upgrading to GoCD 20.5.0](https://docs.gocd.org/20.5.0/installation/upgrade_to_gocd_20.5.0.html) document to migrate your database.
+Follow detailed instructions in [Upgrading to GoCD 20.5.0](https://docs.gocd.org/current/installation/upgrading_go/upgrade_to_gocd_20.5.0.html) document to migrate your database.
 
 
 # Command Arguments:
