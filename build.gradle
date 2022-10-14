@@ -49,7 +49,7 @@ dependencies {
     implementation group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.9.0'
 
     implementation group: 'com.beust', name: 'jcommander', version: '1.82'
-    implementation group: 'me.tongfei', name: 'progressbar', version: '0.9.3'
+    implementation group: 'me.tongfei', name: 'progressbar', version: '0.9.5'
     implementation group: 'org.jooq', name: 'jooq', version: '3.13.1'
 
     implementation group: 'org.liquibase', name: 'liquibase-core', version: '3.8.9'
