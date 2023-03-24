@@ -50,7 +50,7 @@ dependencies {
 
     implementation group: 'com.beust', name: 'jcommander', version: '1.82'
     implementation group: 'me.tongfei', name: 'progressbar', version: '0.9.5'
-    implementation group: 'org.jooq', name: 'jooq', version: '3.16.14'
+    implementation group: 'org.jooq', name: 'jooq', version: '3.18.1'
 
     implementation group: 'org.liquibase', name: 'liquibase-core', version: '3.10.3'
     implementation group: 'net.sf', name: 'dbdeploy', version: '2.11.1'
