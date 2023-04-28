@@ -58,7 +58,7 @@ dependencies {
     implementation group: 'com.h2database', name: 'h2', version: '1.4.200' // Should match version at GoCD 20.5.0 release, since H2 dont guarantee backward compatiiblity
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.6.0'
 
-    testImplementation platform('org.junit:junit-bom:5.9.2')
+    testImplementation platform('org.junit:junit-bom:5.9.3')
     testImplementation group: "org.junit.jupiter", name: "junit-jupiter-api"
     testRuntimeOnly group: "org.junit.jupiter", name: "junit-jupiter-engine"
 }
