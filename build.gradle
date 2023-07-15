@@ -15,16 +15,14 @@
  */
 
 plugins {
-    id 'com.github.jk1.dependency-license-report' version '1.19'
-    id 'co.riiid.gradle' version '0.4.2'
+    id 'java'
+    id 'application'
+    id 'com.github.jk1.dependency-license-report' version '2.5'
+    id 'io.github.humblerookie.gradle' version '0.5.0'
 }
 
-apply plugin: 'java'
-apply plugin: 'application'
-apply plugin: "com.github.jk1.dependency-license-report"
-
 group = 'cd.go.gocd'
-version = '1.0.1'
+version = '1.0.2'
 
 project.ext.projectDesc = [
   id         : 'cd.go.gocd.gocd-database-migrator',
@@ -66,8 +64,10 @@ java {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
-mainClassName = 'com.thoughtworks.go.dbsync.cli.Main'
-applicationDefaultJvmArgs = ['-Xmx4g']
+application {
+    mainClass = 'com.thoughtworks.go.dbsync.cli.Main'
+    applicationDefaultJvmArgs = ['-Xmx4g']
+}
 
 tasks.withType(AbstractArchiveTask) {
     reproducibleFileOrder = true
@@ -81,7 +81,7 @@ test {
 
 jar {
     manifest {
-        attributes(['Main-Class': mainClassName])
+        attributes(['Main-Class': application.mainClass.get()])
     }
 }
 
@@ -122,9 +122,9 @@ tasks.withType(AbstractArchiveTask) { archiveTask ->
     reproducibleFileOrder = true
 
     ['MD5', 'SHA1', 'SHA-256'].each { algo ->
-        archiveTask.outputs.files("${archiveTask.archivePath}.${algo}")
+        archiveTask.outputs.files("${archiveTask.archiveFile.get()}.${algo}")
         archiveTask.doLast {
-            ant.checksum file: archiveTask.archivePath, format: 'MD5SUM', algorithm: algo
+            ant.checksum file: archiveTask.archiveFile.get(), format: 'MD5SUM', algorithm: algo
         }
     }
 }
