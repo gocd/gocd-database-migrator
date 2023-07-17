@@ -206,9 +206,7 @@ class ConverterTest {
         for (int i = 0; i < properties.getLength(); i++) {
             Element property = (Element) properties.item(i);
             String dbms = property.getAttribute("dbms");
-            if (isBlank(dbms)) {
-                continue;
-            } else {
+            if (!isBlank(dbms)) {
                 List<String> dbs = StringUtils.splitAndTrim(dbms, ",");
                 if (dbs.contains(db)) {
                     result.put(property.getAttribute("value"), property.getAttribute("name"));
