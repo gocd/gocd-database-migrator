@@ -56,6 +56,7 @@ import static org.jooq.tools.StringUtils.isBlank;
 public class DbSync {
     static {
         System.setProperty("org.jooq.no-logo", "true");
+        System.setProperty("org.jooq.no-tips", "true");
     }
     static final Logger LOG = LoggerFactory.getLogger(DbSync.class);
     private static final long EXPORT_TIMEOUT_SECONDS = TimeUnit.MINUTES.toSeconds(90);
@@ -329,6 +330,7 @@ public class DbSync {
         return dialect;
     }
 
+    @SuppressWarnings("resource")
     private void dumpTableSQL(String table, Integer rowCount, Connection sourceConnection, DataSource targetDataSource, Writer writer, ProgressBar progressBar) throws IOException, SQLException {
         LOG.debug("Copying {} records in table {}", rowCount, table);
         Field<Long> idField = field("id", Long.class);
@@ -388,6 +390,7 @@ public class DbSync {
                 .withRenderNameStyle(renderNameStyle)));
     }
 
+    @SuppressWarnings("resource")
     private static Map<String, Integer> listTables(BasicDataSource sourceDataSource) {
         Map<String, Integer> tables = new LinkedHashMap<>();
 

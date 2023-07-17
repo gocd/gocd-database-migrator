@@ -36,9 +36,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiConsumer;
-
-import static org.jooq.tools.StringUtils.isBlank;
 
 class ConverterTest {
 
@@ -119,6 +118,7 @@ class ConverterTest {
         transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
         DOMSource schemaSource = new DOMSource(schemaDocument);
         File outputFile = new File("generated", fileName);
+        //noinspection ResultOfMethodCallIgnored
         outputFile.getParentFile().mkdirs();
         transformer.transform(schemaSource, new StreamResult(outputFile));
     }
@@ -170,7 +170,7 @@ class ConverterTest {
         }
     }
 
-    private void rewriteChangeSetColumnTags(Element documentElement, HashMap<String, String> columnTypeMappings) {
+    private void rewriteChangeSetColumnTags(Element documentElement, Map<String, String> columnTypeMappings) {
         NodeList columnNodes = documentElement.getElementsByTagName("column");
         for (int i = 0; i < columnNodes.getLength(); i++) {
             Element columnNode = (Element) columnNodes.item(i);
@@ -191,11 +191,10 @@ class ConverterTest {
         for (int i = 0; i < changeSetNodes.getLength(); i++) {
             Element changeSetNode = (Element) changeSetNodes.item(i);
             changeSetNode.setAttribute("id", String.valueOf(i + 1));
-            changeSetNode.toString();
         }
     }
 
-    HashMap<String, String> properties(String db) throws Exception {
+    Map<String, String> properties(String db) throws Exception {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = dbf.newDocumentBuilder();
         Document document = documentBuilder.parse(getClass().getResourceAsStream("/liquibase.xml"));
@@ -206,7 +205,7 @@ class ConverterTest {
         for (int i = 0; i < properties.getLength(); i++) {
             Element property = (Element) properties.item(i);
             String dbms = property.getAttribute("dbms");
-            if (!isBlank(dbms)) {
+            if (!dbms.isBlank()) {
                 List<String> dbs = StringUtils.splitAndTrim(dbms, ",");
                 if (dbs.contains(db)) {
                     result.put(property.getAttribute("value"), property.getAttribute("name"));
