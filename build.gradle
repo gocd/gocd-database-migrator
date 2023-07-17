@@ -22,7 +22,7 @@ plugins {
 }
 
 group = 'cd.go.gocd'
-version = '1.0.2'
+version = '1.0.3'
 
 project.ext.projectDesc = [
   id         : 'cd.go.gocd.gocd-database-migrator',
@@ -57,6 +57,7 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:5.9.3')
     testImplementation group: "org.junit.jupiter", name: "junit-jupiter-api"
     testRuntimeOnly group: "org.junit.jupiter", name: "junit-jupiter-engine"
+    testRuntimeOnly group: 'org.junit.platform', name: 'junit-platform-launcher'
 }
 
 java {
