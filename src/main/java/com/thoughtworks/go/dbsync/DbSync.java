@@ -29,7 +29,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.io.FileUtils;
 import org.jooq.Record;
 import org.jooq.*;
-import org.jooq.conf.RenderNameStyle;
+import org.jooq.conf.RenderNameCase;
 import org.jooq.conf.SettingsTools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,8 +48,8 @@ import java.util.zip.GZIPOutputStream;
 
 import static com.thoughtworks.go.dbsync.Util.comment;
 import static com.thoughtworks.go.dbsync.Util.*;
-import static org.jooq.conf.RenderNameStyle.AS_IS;
-import static org.jooq.conf.RenderNameStyle.QUOTED;
+import static org.jooq.conf.RenderQuotedNames.EXPLICIT_DEFAULT_QUOTED;
+import static org.jooq.conf.RenderQuotedNames.NEVER;
 import static org.jooq.impl.DSL.*;
 import static org.jooq.tools.StringUtils.isBlank;
 
@@ -373,6 +373,7 @@ public class DbSync {
         InsertValuesStepN<Record> insertQuery = insertInto(table(table), fields);
 
         for (Record record : records) {
+            //noinspection ResultOfMethodCallIgnored
             insertQuery.values(record.intoArray());
         }
 
@@ -384,10 +385,11 @@ public class DbSync {
 
     private static DSLContext renderer(Connection targetConnection) {
         Configuration targetConfiguration = using(targetConnection).configuration();
-        RenderNameStyle renderNameStyle = targetConfiguration.dialect().family() == SQLDialect.POSTGRES ? AS_IS : QUOTED;
         return using(targetConfiguration.derive(SettingsTools.clone(targetConfiguration.settings())
                 .withRenderFormatted(false)
-                .withRenderNameStyle(renderNameStyle)));
+                .withRenderNameCase(RenderNameCase.AS_IS)
+                .withRenderQuotedNames(targetConfiguration.dialect().family() != SQLDialect.POSTGRES ? EXPLICIT_DEFAULT_QUOTED : NEVER)
+        ));
     }
 
     @SuppressWarnings("resource")
