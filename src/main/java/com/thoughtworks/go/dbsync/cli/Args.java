@@ -19,6 +19,8 @@ package com.thoughtworks.go.dbsync.cli;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;
 
+import java.util.concurrent.TimeUnit;
+
 @Parameters(separators = "=")
 public class Args {
     @Parameter(names = {"--help", "-h"}, description = "Prints help.", help = true, order = 100)
@@ -62,4 +64,7 @@ public class Args {
 
     @Parameter(names = {"--threads", "-t"}, description = "Number of import threads. Defaults to number of processors (max of 8).", order = 1400)
     public int threads = Math.max(8, Runtime.getRuntime().availableProcessors());
+
+    @Parameter(names = {"--export-timeout"}, description = "Number of seconds to allow data to be exported from source to target database before timing out.", order = 1500)
+    public long exportTimeoutSeconds = TimeUnit.MINUTES.toSeconds(30);
 }

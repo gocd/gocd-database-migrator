@@ -59,7 +59,6 @@ public class DbSync {
         System.setProperty("org.jooq.no-tips", "true");
     }
     static final Logger LOG = LoggerFactory.getLogger(DbSync.class);
-    private static final long EXPORT_TIMEOUT_SECONDS = TimeUnit.MINUTES.toSeconds(90);
 
     private final Args args;
 
@@ -206,8 +205,8 @@ public class DbSync {
                 }));
                 LOG.debug("Shutting down thread pool executor");
                 executor.shutdown();
-                if (!executor.awaitTermination(EXPORT_TIMEOUT_SECONDS, TimeUnit.SECONDS)) {
-                    throw new InterruptedException(String.format("Timed out after [%s] seconds waiting for DB migration to complete", EXPORT_TIMEOUT_SECONDS));
+                if (!executor.awaitTermination(args.exportTimeoutSeconds, TimeUnit.SECONDS)) {
+                    throw new InterruptedException(String.format("Timed out after [%s] seconds waiting for DB migration to complete. You may want to consider increasing --export-timeout or allocating more resources.", args.exportTimeoutSeconds));
                 }
             } catch (RuntimeException e) {
                 LOG.error(null, e);
