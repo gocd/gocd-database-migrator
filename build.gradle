@@ -22,7 +22,7 @@ plugins {
 }
 
 group = 'cd.go.gocd'
-version = '1.0.3'
+version = '1.0.4'
 
 project.ext.projectDesc = [
   id         : 'cd.go.gocd.gocd-database-migrator',

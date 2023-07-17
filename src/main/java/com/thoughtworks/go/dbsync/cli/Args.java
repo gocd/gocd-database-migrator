@@ -63,7 +63,7 @@ public class Args {
     public boolean progress = false;
 
     @Parameter(names = {"--threads", "-t"}, description = "Number of import threads. Defaults to number of processors (max of 8).", order = 1400)
-    public int threads = Math.max(8, Runtime.getRuntime().availableProcessors());
+    public int threads = Math.min(8, Runtime.getRuntime().availableProcessors());
 
     @Parameter(names = {"--export-timeout"}, description = "Number of seconds to allow data to be exported from source to target database before timing out.", order = 1500)
     public long exportTimeoutSeconds = TimeUnit.MINUTES.toSeconds(30);
