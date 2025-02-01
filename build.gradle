@@ -37,7 +37,9 @@ project.ext.projectDesc = [
 
 repositories {
     mavenCentral()
-    maven { url "https://nexus.gocd.io/repository/maven-releases/" }
+    flatDir {
+        dirs 'lib'
+    }
 }
 
 dependencies {
@@ -49,6 +51,7 @@ dependencies {
     implementation group: 'org.jooq', name: 'jooq', version: '3.16.23'
 
     implementation group: 'org.liquibase', name: 'liquibase-core', version: '3.10.3'
+    implementation name:  'dbdeploy', version: '2.11.1'
     implementation group: 'net.sf', name: 'dbdeploy', version: '2.11.1'
     implementation group: 'com.mysql', name: 'mysql-connector-j', version: '9.2.0'
     implementation group: 'com.h2database', name: 'h2', version: '1.4.200' // Should match version at GoCD 20.5.0 release, since H2 dont guarantee backward compatiiblity
