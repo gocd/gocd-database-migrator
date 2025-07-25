@@ -13,11 +13,11 @@ Know more about GoCD support for multiple databases [here](https://docs.gocd.org
 * As part of migrating data from a older GoCD `v20.4.0` (or below) to the GoCD `v20.5.0` database, users can convert/sync data from one database to another. This allows GoCD users to switch from any of the existing database to `H2`, `PostgreSQL` or `MySQL` database.
 
 * For databases which are already migrated and are GoCD `v20.5.0` compliant, this tool can be used to sync data to a new database post the initial migration to GoCD `v20.5.0`.
-E.g Sync data from a GoCD `v20.5.0` H2 database to a new PostgreSQL database. Verified to work till GoCD `v20.8.0`.
+E.g Sync data from a GoCD `v20.5.0` H2 database to a new PostgreSQL database. Verified to work till GoCD `v25.3.0`.
 
 ## Supported Databases
 
-* H2 (`1.3.xxx` and above)
+* H2 (`1.3.xxx` to `1.4.xxx`)
 * PostgreSQL (`9.6` and above)
 * MySQL (`8.0`)
 
