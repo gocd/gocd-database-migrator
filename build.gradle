@@ -43,7 +43,7 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'commons-io', name: 'commons-io', version: '2.19.0'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.20.0'
     implementation group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.13.0'
 
     implementation group: 'com.beust', name: 'jcommander', version: '1.82'
@@ -57,7 +57,7 @@ dependencies {
     implementation group: 'com.h2database', name: 'h2', version: '1.4.200' // Should match version at GoCD 20.5.0 release, since H2 dont guarantee backward compatiiblity
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.7.7'
 
-    testImplementation platform('org.junit:junit-bom:5.13.2')
+    testImplementation platform('org.junit:junit-bom:5.13.4')
     testImplementation group: "org.junit.jupiter", name: "junit-jupiter-api"
     testRuntimeOnly group: "org.junit.jupiter", name: "junit-jupiter-engine"
     testRuntimeOnly group: 'org.junit.platform', name: 'junit-platform-launcher'
