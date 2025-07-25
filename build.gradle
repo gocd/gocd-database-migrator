@@ -51,7 +51,21 @@ dependencies {
     implementation group: 'me.tongfei', name: 'progressbar', version: '0.10.1'
     implementation group: 'org.jooq', name: 'jooq', version: '3.16.23'
 
-    implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.33.0'
+    implementation(group: 'org.liquibase', name: 'liquibase-core', version: '4.33.0') {
+        // Not needed, according to https://github.com/liquibase/liquibase/issues/1866
+        exclude group: 'javax.xml.bind', module: 'jaxb-api'
+
+        // These dependencies used to be shaded, but are now directly added. However they seem only related to use of
+        // CSV or YAML snapshots/changelogs and/or offline storage which does not seem relevant to GoCD.
+        exclude group: 'org.yaml', module: 'snakeyaml'
+        exclude group: 'com.opencsv', module: 'opencsv'
+    }
+    constraints {
+        implementation('org.apache.commons:commons-text:1.14.0') {
+            because 'liquibase uses an outdated version'
+        }
+    }
+
     implementation name:  'dbdeploy', version: '2.11.1'
     implementation group: 'com.mysql', name: 'mysql-connector-j', version: '9.3.0'
     implementation group: 'com.h2database', name: 'h2', version: '1.4.200' // Should match version at GoCD 20.5.0 release, since H2 dont guarantee backward compatiiblity
