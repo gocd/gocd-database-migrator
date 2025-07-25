@@ -17,7 +17,7 @@
 plugins {
     id 'java'
     id 'application'
-    id 'com.github.jk1.dependency-license-report' version '2.5'
+    id 'com.github.jk1.dependency-license-report' version '2.9'
     id 'io.github.humblerookie.gradle' version '0.5.0'
 }
 
