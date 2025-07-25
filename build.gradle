@@ -45,6 +45,7 @@ repositories {
 dependencies {
     implementation group: 'commons-io', name: 'commons-io', version: '2.20.0'
     implementation group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.13.0'
+    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.5.18'
 
     implementation group: 'com.beust', name: 'jcommander', version: '1.82'
     implementation group: 'me.tongfei', name: 'progressbar', version: '0.10.1'
