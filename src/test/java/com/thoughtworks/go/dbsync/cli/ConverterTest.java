@@ -16,7 +16,6 @@
 
 package com.thoughtworks.go.dbsync.cli;
 
-import liquibase.util.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -33,10 +32,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.BiConsumer;
 
 class ConverterTest {
@@ -206,7 +202,7 @@ class ConverterTest {
             Element property = (Element) properties.item(i);
             String dbms = property.getAttribute("dbms");
             if (!dbms.isBlank()) {
-                List<String> dbs = StringUtils.splitAndTrim(dbms, ",");
+                Set<String> dbs = Set.of(dbms.split( ","));
                 if (dbs.contains(db)) {
                     result.put(property.getAttribute("value"), property.getAttribute("name"));
                 }
