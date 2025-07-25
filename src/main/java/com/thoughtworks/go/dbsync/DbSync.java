@@ -18,25 +18,23 @@ package com.thoughtworks.go.dbsync;
 
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.util.ContextInitializer;
-import ch.qos.logback.core.joran.spi.JoranException;
 import com.thoughtworks.go.dbsync.cli.Args;
-import liquibase.exception.LiquibaseException;
 import liquibase.integration.commandline.Main;
 import me.tongfei.progressbar.ProgressBar;
 import me.tongfei.progressbar.ProgressBarBuilder;
 import me.tongfei.progressbar.ProgressBarStyle;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.io.FileUtils;
-import org.jooq.Record;
 import org.jooq.*;
+import org.jooq.Record;
 import org.jooq.conf.RenderNameCase;
 import org.jooq.conf.SettingsTools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
-import java.io.File;
 import java.io.*;
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -46,8 +44,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.zip.GZIPOutputStream;
 
-import static com.thoughtworks.go.dbsync.Util.comment;
 import static com.thoughtworks.go.dbsync.Util.*;
+import static com.thoughtworks.go.dbsync.Util.comment;
 import static org.jooq.conf.RenderQuotedNames.EXPLICIT_DEFAULT_QUOTED;
 import static org.jooq.conf.RenderQuotedNames.NEVER;
 import static org.jooq.impl.DSL.*;
@@ -239,7 +237,7 @@ public class DbSync {
         }
     }
 
-    private void executeLiquibaseWithContext(DataSource targetDataSource, Writer writer, String contexts) throws IOException, LiquibaseException, JoranException {
+    private void executeLiquibaseWithContext(DataSource targetDataSource, Writer writer, String contexts) throws Exception {
 
         if (!isBlank(args.outputFile)) {
             File tempFile = File.createTempFile("updateSQL", ".sql");
