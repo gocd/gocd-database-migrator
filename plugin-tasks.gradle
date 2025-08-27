@@ -48,7 +48,13 @@ static def getLastTag(boolean isExperimental) {
   }
 }
 
+interface InjectedExecOps {
+    @Inject //@javax.inject.Inject
+    ExecOperations getExecOps()
+}
+
 String getCommitsSinceLastTag(String from) {
+  def injected = project.objects.newInstance(InjectedExecOps)
   def hashStdOut = new ByteArrayOutputStream()
   def hashErrorOutput = new ByteArrayOutputStream()
   def commandToExecute = ["git", "log", "--no-merges", "--pretty=\"%h - %s\""]
@@ -57,7 +63,7 @@ String getCommitsSinceLastTag(String from) {
   }
 
   try {
-    project.exec {
+    injected.execOps.exec {
       commandLine commandToExecute
       standardOutput = hashStdOut
       errorOutput = hashErrorOutput
