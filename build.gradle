@@ -22,7 +22,7 @@ plugins {
 }
 
 group = 'cd.go.gocd'
-version = '1.0.5'
+version = '2.0.0'
 
 project.ext.projectDesc = [
   id         : 'cd.go.gocd.gocd-database-migrator',
@@ -77,8 +77,13 @@ dependencies {
     testRuntimeOnly group: 'org.junit.platform', name: 'junit-platform-launcher'
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
 tasks.withType(JavaCompile).configureEach {
-    options.release = 11
+    options.release = 17
 }
 
 application {
