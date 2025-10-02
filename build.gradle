@@ -43,15 +43,15 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'commons-io', name: 'commons-io', version: '2.20.0'
-    implementation group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.13.0'
-    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.5.19'
+    implementation 'commons-io:commons-io:2.20.0'
+    implementation 'org.apache.commons:commons-dbcp2:2.13.0'
+    implementation 'ch.qos.logback:logback-classic:1.5.19'
 
-    implementation group: 'com.beust', name: 'jcommander', version: '1.82'
-    implementation group: 'me.tongfei', name: 'progressbar', version: '0.10.1'
-    implementation group: 'org.jooq', name: 'jooq', version: '3.16.23'
+    implementation 'com.beust:jcommander:1.82'
+    implementation 'me.tongfei:progressbar:0.10.1'
+    implementation 'org.jooq:jooq:3.16.23'
 
-    implementation(group: 'org.liquibase', name: 'liquibase-core', version: '5.0.0') {
+    implementation('org.liquibase:liquibase-core:5.0.0') {
         // Not needed, according to https://github.com/liquibase/liquibase/issues/1866
         exclude group: 'javax.xml.bind', module: 'jaxb-api'
 
@@ -67,14 +67,14 @@ dependencies {
     }
 
     implementation name:  'dbdeploy', version: '2.11.1'
-    implementation group: 'com.mysql', name: 'mysql-connector-j', version: '9.4.0'
-    implementation group: 'com.h2database', name: 'h2', version: '1.4.200' // Should match version at GoCD 20.5.0 release, since H2 dont guarantee backward compatiiblity
-    implementation group: 'org.postgresql', name: 'postgresql', version: '42.7.8'
+    implementation 'com.mysql:mysql-connector-j:9.4.0'
+    implementation 'com.h2database:h2:1.4.200' // Should match version at GoCD 20.5.0 release, since H2 dont guarantee backward compatiiblity
+    implementation 'org.postgresql:postgresql:42.7.8'
 
     testImplementation platform('org.junit:junit-bom:6.0.0')
-    testImplementation group: "org.junit.jupiter", name: "junit-jupiter-api"
-    testRuntimeOnly group: "org.junit.jupiter", name: "junit-jupiter-engine"
-    testRuntimeOnly group: 'org.junit.platform', name: 'junit-platform-launcher'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 java {
