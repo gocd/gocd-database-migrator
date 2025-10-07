@@ -1,11 +1,14 @@
-# This workflow will build a Java project with Gradle
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
-
 name: Test and Build
 
 on:
   push:
     branches: [ master ]
+  workflow_dispatch:
+    inputs:
+      prerelease:
+        description: 'The release should be an experimental release'
+        default: 'NO'
+        required: true
 
 jobs:
   test:
@@ -29,12 +32,13 @@ jobs:
         if: github.ref == 'refs/heads/master'
         env:
           DEPENDENCY_GRAPH_INCLUDE_CONFIGURATIONS: runtimeClasspath
-  previewGithubRelease:
+  githubRelease:
     needs: test
     runs-on: ubuntu-latest
     env:
       GITHUB_USER:  "gocd"
       GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      PRERELEASE:   "${{ github.event.inputs.prerelease }}"
     steps:
       - name: Harden the runner (Audit all outbound calls)
         uses: step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a # v2.13.1
@@ -49,5 +53,5 @@ jobs:
         with:
           java-version: 21
           distribution: temurin
-      - name: Test with Gradle
+      - name: Build and release with Gradle
         run: ./gradlew githubRelease

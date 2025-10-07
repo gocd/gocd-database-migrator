@@ -17,23 +17,37 @@
 plugins {
     id 'java'
     id 'application'
-    id 'com.github.jk1.dependency-license-report' version '2.9'
-    id 'io.github.humblerookie.gradle' version '0.5.0'
+}
+apply from: "https://raw.githubusercontent.com/gocd/gocd-plugin-gradle-task-helpers/master/version-helper.gradle?_=${(int) (new Date().toInstant().epochSecond / 60)}"
+apply from: "https://raw.githubusercontent.com/gocd/gocd-plugin-gradle-task-helpers/master/release-task-helper.gradle?_=${(int) (new Date().toInstant().epochSecond / 60)}"
+
+gocdPlugin {
+    id = 'cd.go.gocd.gocd-database-migrator'
+    pluginVersion = '2.0.0'
+    name = 'GoCD Database Migrator'
+    description = 'Tool to help migrator pre-20.5.0 databases to 20.5.0 database.'
+    vendorName = 'GoCD Contributors'
+    vendorUrl = 'https://github.com/gocd/gocd-database-migrator'
+
+    githubRepo {
+        owner = System.getenv('GITHUB_USER') ?: 'bob'
+        repo = 'gocd-database-migrator'
+        token = System.getenv('GITHUB_TOKEN') ?: 'bad-token'
+    }
+
+    pluginProject = project
+
+    prerelease = !"No".equalsIgnoreCase(System.getenv('PRERELEASE'))
+    prereleaseDryrun = !"Yes".equalsIgnoreCase(System.getenv('PRERELEASE'))
+    assetsToRelease = [project.tasks.distZip, project.tasks.distTar]
+
+    licenseReport {
+        excludeGroups = [''] // dbdeploy was licenses under LGPL until it was pulled from repos (thus having no group)
+    }
 }
 
 group = 'cd.go.gocd'
-version = '2.0.0'
-
-project.ext.projectDesc = [
-  id         : 'cd.go.gocd.gocd-database-migrator',
-  repo       : 'gocd-database-migrator',
-  version    : project.version,
-  name       : 'GoCD Database Migrator',
-  description: 'Tool to help migrator pre-20.5.0 databases to 20.5.0 database.',
-  vendorName : 'GoCD Contributors',
-  vendorUrl  : 'https://github.com/gocd/gocd-database-migrator'
-]
-
+version = gocdPlugin.fullVersion(project)
 
 repositories {
     mavenCentral()
@@ -66,7 +80,7 @@ dependencies {
         }
     }
 
-    implementation name:  'dbdeploy', version: '2.11.1'
+    implementation ':dbdeploy:2.11.1'
     implementation 'com.mysql:mysql-connector-j:9.4.0'
     implementation 'com.h2database:h2:1.4.200' // Should match version at GoCD 20.5.0 release, since H2 dont guarantee backward compatiiblity
     implementation 'org.postgresql:postgresql:42.7.8'
@@ -91,12 +105,6 @@ application {
     applicationDefaultJvmArgs = ['-Xmx4g']
 }
 
-tasks.withType(AbstractArchiveTask) {
-    reproducibleFileOrder = true
-    preserveFileTimestamps = false
-}
-
-
 test {
     useJUnitPlatform()
 }
@@ -113,14 +121,6 @@ distributions {
             from("LICENSE")
             from("README.md")
 
-            from(generateLicenseReport) {
-                into "licenses"
-            }
-
-            from(file('LICENSE')) {
-                into "licenses"
-            }
-
             from("src/main/resources/h2deltas") {
                 into "h2deltas"
             }
@@ -132,13 +132,24 @@ distributions {
     }
 }
 
-distTar {
-    compression = Compression.GZIP
+tasks.named("distZip") {
+    dependsOn checkLicense
+    eachFile { fcd ->
+        fcd.path = fcd.path.substring(fcd.path.indexOf('/') + 1) // Strip off the root directory name
+    }
 }
 
-tasks.withType(AbstractArchiveTask) { archiveTask ->
-    includeEmptyDirs false
-    duplicatesStrategy DuplicatesStrategy.EXCLUDE
+tasks.named("distTar") {
+    dependsOn checkLicense
+    compression = Compression.GZIP
+    eachFile { fcd ->
+        fcd.path = fcd.path.substring(fcd.path.indexOf('/') + 1) // Strip off the root directory name
+    }
+}
+
+tasks.withType(AbstractArchiveTask).configureEach { archiveTask ->
+    includeEmptyDirs = false
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
     preserveFileTimestamps = false
     reproducibleFileOrder = true
@@ -150,5 +161,3 @@ tasks.withType(AbstractArchiveTask) { archiveTask ->
         }
     }
 }
-
-apply from: 'plugin-tasks.gradle'
