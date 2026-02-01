@@ -59,10 +59,10 @@ repositories {
 dependencies {
     implementation 'commons-io:commons-io:2.21.0'
     implementation 'org.apache.commons:commons-dbcp2:2.14.0'
-    implementation 'ch.qos.logback:logback-classic:1.5.23'
+    implementation 'ch.qos.logback:logback-classic:1.5.27'
 
     implementation 'com.beust:jcommander:1.82'
-    implementation 'me.tongfei:progressbar:0.10.1'
+    implementation 'me.tongfei:progressbar:0.10.2'
     implementation 'org.jooq:jooq:3.16.23'
 
     implementation('org.liquibase:liquibase-core:5.0.1') {
@@ -81,11 +81,11 @@ dependencies {
     }
 
     implementation ':dbdeploy:2.11.1'
-    implementation 'com.mysql:mysql-connector-j:9.5.0'
+    implementation 'com.mysql:mysql-connector-j:9.6.0'
     implementation 'com.h2database:h2:1.4.200' // Should match version at GoCD 20.5.0 release, since H2 dont guarantee backward compatiiblity
-    implementation 'org.postgresql:postgresql:42.7.8'
+    implementation 'org.postgresql:postgresql:42.7.9'
 
-    testImplementation platform('org.junit:junit-bom:6.0.1')
+    testImplementation platform('org.junit:junit-bom:6.0.2')
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
