@@ -65,7 +65,7 @@ dependencies {
     implementation 'me.tongfei:progressbar:0.10.2'
     implementation 'org.jooq:jooq:3.16.23'
 
-    implementation('org.liquibase:liquibase-core:5.0.1') {
+    implementation('org.liquibase:liquibase-core:5.0.2') {
         // Not needed, according to https://github.com/liquibase/liquibase/issues/1866
         exclude group: 'javax.xml.bind', module: 'jaxb-api'
 
