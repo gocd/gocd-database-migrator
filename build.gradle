@@ -23,7 +23,7 @@ apply from: "https://raw.githubusercontent.com/gocd/gocd-plugin-gradle-task-help
 
 gocdPlugin {
     id = 'cd.go.gocd.gocd-database-migrator'
-    pluginVersion = '2.0.0'
+    pluginVersion = '2.0.1'
     name = 'GoCD Database Migrator'
     description = 'Tool to help migrator pre-20.5.0 databases to 20.5.0 database.'
     vendorName = 'GoCD Contributors'
@@ -61,7 +61,7 @@ dependencies {
     implementation 'org.apache.commons:commons-dbcp2:2.14.0'
     implementation 'ch.qos.logback:logback-classic:1.6.1'
 
-    implementation 'com.beust:jcommander:1.82'
+    implementation 'org.jcommander:jcommander:3.0'
     implementation 'me.tongfei:progressbar:0.10.2'
     implementation 'org.jooq:jooq:3.16.23'
 
