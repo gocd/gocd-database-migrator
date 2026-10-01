@@ -59,7 +59,7 @@ repositories {
 dependencies {
     implementation 'commons-io:commons-io:2.22.0'
     implementation 'org.apache.commons:commons-dbcp2:2.14.0'
-    implementation 'ch.qos.logback:logback-classic:1.6.3'
+    implementation 'ch.qos.logback:logback-classic:1.6.4'
 
     implementation 'org.jcommander:jcommander:3.0'
     implementation 'me.tongfei:progressbar:0.10.2'
